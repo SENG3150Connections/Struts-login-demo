@@ -17,13 +17,7 @@ public class Authentication extends ActionSupport {
     private String username;
     private String password;
 
-
-
-
-    public String execute() {
-
-        // Populate dummy user data
-
+    public Authentication() {
         users.add("user");
         passwords.add("pw");
         users.add("AnotherUser");
@@ -33,24 +27,20 @@ public class Authentication extends ActionSupport {
 
 
 
-        // Test input
 
-        for (int i = 0; i < users.size(); i++ ) {
-
-            if ( username.equals(users.get(i)) ) {
-
-                if (password.equals(passwords.get(i))) {
-
-                    // match found, input is valid
-                    return "SUCCESS";
-                }
-
-            }
-
-        }
+    }
 
 
-        return "ERROR";
+
+    public String execute() {
+
+        // Populate dummy user data
+
+
+
+
+
+        return "SUCCESS";
 
 
     }
@@ -70,6 +60,30 @@ public class Authentication extends ActionSupport {
         }
 
 
+        // Test input
+
+        boolean inputValid = false;
+
+        for (int i = 0; i < users.size(); i++ ) {
+
+            if ( username.equals(users.get(i)) ) {
+
+                if (password.equals(passwords.get(i))) {
+
+                    // match found, input is valid
+                    inputValid = true;
+                }
+
+            }
+
+        }
+
+        if (!inputValid) {
+
+            addFieldError("password", getText("Password Incorrect"));
+
+
+        }
 
 
     }
